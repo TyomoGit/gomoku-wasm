@@ -1,6 +1,9 @@
-/target
-**/*.rs.bk
-Cargo.lock
+node_modules/
+target/
+.vscode/
 bin/
 pkg/
+**/*.rs.bk
+Cargo.lock
 wasm-pack.log
+script.js

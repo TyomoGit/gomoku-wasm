@@ -8,17 +8,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 20.x]
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-      - name: build
-        run: wasm-pack build --target web
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - uses: actions/upload-artifact@v3
         with:
           name: site
           path: ./
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path:  ./

@@ -1,0 +1,14 @@
+{
+  "name": "gomoku-wasm",
+  "version": "0.1.0",
+  "description": "<div align=\"center\">",
+  "scripts": {
+    "test": "wasm-pack test --firefox --chrome --safari --headless",
+    "build": "wasm-pack build --target web && tsc"
+  },
+  "author": "Tyomo",
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "typescript": "^5.4.2"
+  }
+}
