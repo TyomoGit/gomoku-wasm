@@ -1,0 +1,38 @@
+name: Github Pages
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - actions-test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+      - name: build
+        run: wasm-pack build --target web
+      - uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: ./
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path:  ./
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        id: deployment
