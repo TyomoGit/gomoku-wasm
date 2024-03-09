@@ -1,0 +1,18 @@
+html {
+    font-family: sans-serif;
+}
+
+.container, small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+    justify-content: left;
+    align-items: start;
+}
+
+small {
+    padding: 5rem;
+}
