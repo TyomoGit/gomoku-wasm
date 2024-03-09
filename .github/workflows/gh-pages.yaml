@@ -14,14 +14,13 @@ jobs:
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
       - name: build
         run: wasm-pack build --target web
-      - run: echo `pwd`
       - uses: actions/upload-artifact@v3
         with:
           name: site
-          path: /**
+          path: ./
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: /**
+          path:  ./
 
   deploy:
     needs: build
