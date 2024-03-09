@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - actions-test
+      - main
 
 jobs:
   build:
